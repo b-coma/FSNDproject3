@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <title>Edit Item</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>Edit Item</h1>
+            </div>
+
+            <div id="content">
+                <div id="nav">
+
+                </div>
+
+                <div id="main">
+                    <form action="#" method = "post">
+                        Name:
+                        <input type ="text" maxlength="100" name="name" value="{{item.name}}" required>
+
+                        <br><br>
+
+                        Description:
+                        <textarea maxlength="250" rows="3" name="description">{{item.description}}</textarea>
+
+                        <br><br><br>
+
+                        <!--AUTHORIZATION CHECK -->
+                        {% if user_id == item.user_id %} 
+                            <button type="submit" id="submit" type="submit">
+                                Update
+                            </button>
+                        {% endif %}
+                    </form>
+
+                    <a href = '{{url_for('showItems')}}'>
+                        <button>Cancel</button>
+                    </a>
+
+                    {% if user_id != item.user_id %} 
+                        <p>You are not authorized to edit this item</p>
+                        <p><a href = "{{url_for('showLogin')}}">
+                            <button>Login</button>
+                        </a></p>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <div id="footer">
+                You are logged in as
+            </div>
+        </div>
+
+</body>
+
+</html>

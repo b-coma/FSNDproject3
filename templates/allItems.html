@@ -1,0 +1,71 @@
+<html>
+    <header>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <title>Latest Items</title>
+    </header>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>Item List</h1>
+            </div>
+
+            <div id="content">
+                <div id="nav">
+
+                    <h3>Categories</h3>
+
+                    {% if user_id !=0 %} 
+                    <a href="{{url_for('newCategory')}}">
+                        <button>New</button>
+                    </a>
+                    {% endif %}
+
+                    {% for category in categories %}
+                        <p><a href = "{{url_for('showCategory', category_id = category.id)}}">
+                            {{category.name}}
+                        </a></p>
+                    {% endfor %}
+
+                    <br>
+
+                    <!--IF NOT LOGGED IN, SHOW LOGIN BUTTON-->
+                    {% if user_id ==0 %}                     
+                    <p><a href = "{{url_for('showLogin')}}">
+                        <button>Login</button>
+                    </a>
+                    {% endif %}
+
+                    <!--IF LOGGED IN, SHOW LOGOUT BUTTON-->
+                    {% if user_id !=0 %} 
+                    <p><a href = "{{url_for('gdisconnect')}}">
+                        <button>Logout</button>
+                    </a>
+                    {% endif %}
+
+
+                </div>
+
+                <div id="main">
+                    <h2>Items, most recent first</h2>
+                    {% for item in items %}
+                        <p><h3><a href = "{{url_for('showOneItem', item_id = item.id)}}">
+                            {{item.name}}
+                        </a></h3>
+                        <!--AUTHORIZATION CHECK -->
+                        {% if user_id ==item.user_id %} 
+                            <a href = "{{url_for('editItem', item_id =item.id)}}">Edit</a>
+                            <a href = "{{url_for('deleteItem', item_id=item.id)}}">Delete</a>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="footer">
+                You are logged in as 
+            </div>
+        </div>
+
+</body>
+
+</html>

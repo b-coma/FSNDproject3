@@ -1,0 +1,35 @@
+<html>
+    <header>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <title>{{item.name}}</title>
+    </header>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>{{item.name}}</h1>
+            </div>
+
+            <div id="content">
+                <div id="nav">
+                    <br>
+                    {% if user_id ==item.user_id %} 
+                        <a href = '{{url_for('editItem', item_id =item.id)}}'>Edit</a>
+                        <br>
+                        <a href = '{{url_for('deleteItem', item_id=item.id)}}'>Delete</a>
+                    {% endif %}
+                </div>
+
+                <div id="main">
+                    <h4>Category: {{category.name}}</h4>
+                    <h4>Description:  {{item.description}}</h4>
+                </div>
+            </div>
+
+            <div id="footer">
+                You are logged in as
+            </div>
+        </div>
+
+</body>
+
+</html>

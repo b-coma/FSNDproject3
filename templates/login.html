@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <!-- google API -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+        </script>
+        <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+        </script>
+
+        <script>
+          function start() {
+            gapi.load('auth2', function() {
+              auth2 = gapi.auth2.init({
+                //UPDATE CLIENT ID HERE whenever new json is added
+                client_id: '761785076722-80rjsc01riri3o4iovgjha8inmsvs0j3.apps.googleusercontent.com',
+              });
+            });
+          }
+        </script>
+
+        <title>Login</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>Login</h1>
+            </div>
+
+            <div id="content">
+                <div id="nav">
+                  <!-- google sign in button displayed with this-->
+
+                  <button id="signinButton">Sign in with Google</button>
+                  <script>
+                    $('#signinButton').click(function() {
+                      auth2.grantOfflineAccess().then(signInCallback);
+                    });
+                  </script>
+                  <br><br>
+                </div>
+
+                <div id="main">
+
+
+                  <div id="result"></div>
+
+                  <script>
+                    //sign-in call back function from above 
+                  function signInCallback(authResult) {
+                    if (authResult['code']) {
+                      // once the user is authorized, hide the button, or it will look like the screen isn't responding
+                      $('#signinButton').attr('style', 'display: none');
+                      // Send a code to the server, if it responds, send a 'login successful' back to the page and then redirect back to home
+                      $.ajax({
+                        type: 'POST',
+                        url: '/gconnect?state={{STATE}}',
+                        processData: false,
+                        data: authResult['code'],
+                        contentType: 'application/octet-stream; charset=utf-8',
+                        success: function(result) {
+                          // verify response
+                          if (result) {
+                            $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                           setTimeout(function() {
+                            window.location.href = "/items";
+                           }, 4000);
+                            
+                        } else if (authResult['error']) {
+                      console.log('There was an error: ' + authResult['error']);
+                    } else {
+                          $('#result').html('Did not make the server side call.  Check configuration logs and all those good things');
+                           }
+                        }
+                        
+                    }); } }
+                  </script>
+                </div>
+            </div>
+
+            <div id="footer">
+                
+            </div>
+        </div>
+
+</body>
+
+</html>

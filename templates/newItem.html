@@ -1,0 +1,49 @@
+<html>
+    <header>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <title>Create New Item</title>
+    </header>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>Create New Item</h1>
+            </div>
+
+            <div id="content">
+                <div id="nav">
+
+                </div>
+
+                <div id="main">
+                    Category:
+                    <br><br>
+                    <form action="#" method = "post">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type ="text" maxlength="100" name="name" required>
+
+                            <br><br>
+
+                            <label for="description">Description:</label>
+                            <textarea maxlength="250" rows="3" name="description" required></textarea>
+
+                            <br><br><br>
+
+                            <button type="submit" id="submit">Save</button>
+                        </div>
+                    </form>
+
+                    <a href = '{{url_for('showItems')}}'>
+                        <button >Cancel</button>
+                    </a>    
+                </div>
+            </div>
+
+            <div id="footer">
+                You are logged in as
+            </div>
+        </div>
+
+</body>
+
+</html>
