@@ -1,10 +1,13 @@
 1) IP address & SSH port where server can be accessed by reviewer:
+IP address: 3.226.4.231
 2) Complete URL to hosted web app
+host name: ec2-3-226-4-231.compute-1.amazonaws.com
 3) summary of software installed (by me)
-Installed by me: finger
+Installed by me: installed finger, apache2, libapache2-mod-wsgi, postgresql, git, python-pip,
+ virtualenv, flask, httplib2, oauth2client, sqlalchemy,
+psycopg2 (errors resolved 8/6), requests, python-psycopg2, libpa-dev,
+postgresql-contrib
 
-kept back:
-linux-aws linux-headers-aws linux-image-aws open-vm-tools ubuntu-minimal
 4) list of any 3rd part resources you made use of:
 a: https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/
 b: https://askubuntu.com/questions/27559/how-do-i-disable-remote-ssh-login-as-root-from-a-server
@@ -12,10 +15,16 @@ c: https://askubuntu.com/questions/1001830/is-there-a-way-to-change-default-ssh-
 d: man ssh
 e: man ssh_config
 f: https://github.com/jungleBadger/-nanodegree-linux-server-troubleshoot/tree/master/Blocked_SSH_port
+g: https://www.techiediaries.com/error-you-need-to-install-postgresql-server-dev-x-y-for-building-a-server-side-extension-or-libpq-dev-for-building-a-client-side-application/
+h: https://www.hcidata.info/host2ip.cgi
 ------------
 1) Ran 'sudo apt-get update', 'sudo apt-get upgrade', and 'sudo apt-get autoremove' to update software and remove unnecessary software
 
-2) installed finger, apache2, libapache2-mod-wsgi, postgresql, git
+2) installed finger, apache2, libapache2-mod-wsgi, postgresql, git, python-pip,
+ virtualenv, flask, httplib2, oauth2client, sqlalchemy, 
+psycopg2 (errors resolved 8/6), requests, python-psycopg2, libpa-dev,
+postgresql-contrib
+
 
 3) created user 'grader', password 'lightsail'
 
@@ -88,10 +97,10 @@ http://ec2-54-164-28-151.us-east-2.compute.amazonaws.com
 created public static ip (3.226.4.231), tried to navigate there via browser, same error
 created http://ec2-3-226-4-231.us-east-2.compute.amazonaws.com
 -----------
-logs: [Mon Aug 05 17:46:07.962898 2019] [wsgi:error] [pid 1409:tid 139950318130944] [client 73.154.170.66:61139] Target WSGI script not found or unable to stat: /var/www/html/myapp.wsgi
+logs: [Mon Aug 05 17:46:07.962898 2019] [wsgi:error]
+ [pid 1409:tid 139950318130944] [client 73.154.170.66:61139]
+ Target WSGI script not found or unable to stat:
+ /var/www/html/myapp.wsgi
 -----------
 new access point:
 ssh -i /Users/licia/Downloads/lightsail.pem ubuntu@3.226.4.231 -p 2200
----------------
-project 2 location: /Users/licia/Desktop/FSND/fullstack/project2/fullstack-nanodegree-vm/vagrant/catalog
-Readme location: /FSND/FULLSTACK/linuxlesson
